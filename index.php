@@ -56,9 +56,10 @@ function init() {
 	renderer = new THREE.WebGLRenderer();
 	
 	// todo - support pixelRatio in this demo
-	renderer.setSize( width, height );
+	renderer.setSize( width, height ); 
 	document.body.appendChild( renderer.domElement );
 	scene = new THREE.Scene();
+	scene.background = new THREE.Color( 0xffffff );
 	camera = new THREE.PerspectiveCamera( 45, width / height, 0.1, 100 );
 	camera.position.set( 0, 0, 8 );
 	controls = new THREE.OrbitControls( camera, renderer.domElement );
@@ -106,8 +107,8 @@ function init() {
 	outlinePass = new THREE.OutlinePass( new THREE.Vector2( window.innerWidth, window.innerHeight ), scene, camera );
 	composer.addPass( outlinePass );
 	
-	outlinePass.visibleEdgeColor.set( '#ffffff' );
-	outlinePass.hiddenEdgeColor.set( '#ffffff' );
+	outlinePass.visibleEdgeColor.set( '#00ff00' );
+	outlinePass.hiddenEdgeColor.set( '#00ff00' );
 	outlinePass.edgeStrength = Number( 10 );		// сила/прочность
 	outlinePass.edgeThickness = Number( 0.1 );	// толщина
 
@@ -158,6 +159,8 @@ function animate() {
 	requestAnimationFrame( animate );
 
 	controls.update();
+	
+	renderer.render(scene, camera);
 	composer.render();
 }
 
